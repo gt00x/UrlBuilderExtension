@@ -1,9 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import UrlBuilder from "./pages/UrlBuilder";
-
-// keep your existing global CSS import here, e.g.:
-import "./index.css"; // or "./globals.css" or whatever you had before
+import "./index.css"; // keep whatever global CSS you had (index.css / globals.css / etc.)
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
