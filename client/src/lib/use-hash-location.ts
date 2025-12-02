@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { BaseLocationHook } from "wouter/use-location";
 
 // returns the current hash location (minus the # symbol)
 // and a function to update it
-export const useHashLocation: BaseLocationHook = () => {
+export const useHashLocation = () => {
   const [loc, setLoc] = useState(window.location.hash.replace(/^#/, "") || "/");
 
   useEffect(() => {
@@ -18,5 +17,5 @@ export const useHashLocation: BaseLocationHook = () => {
     window.location.hash = to;
   };
 
-  return [loc, navigate];
+  return [loc, navigate] as [string, (to: string) => void];
 };
