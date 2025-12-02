@@ -1,7 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
+import { useLocation } from "wouter";
 
 export default function NotFound() {
+  const [location] = useLocation();
+  
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
       <Card className="w-full max-w-md mx-4">
@@ -14,6 +17,13 @@ export default function NotFound() {
           <p className="mt-4 text-sm text-gray-600">
             Did you forget to add the page to the router?
           </p>
+          
+          <div className="mt-4 p-3 bg-slate-100 rounded text-xs font-mono break-all">
+            <p className="font-bold">Debug Info:</p>
+            <p>Current Location (wouter): {location}</p>
+            <p>Window Hash: {window.location.hash}</p>
+            <p>Window Pathname: {window.location.pathname}</p>
+          </div>
         </CardContent>
       </Card>
     </div>
