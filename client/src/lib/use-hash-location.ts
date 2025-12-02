@@ -3,10 +3,19 @@ import { useState, useEffect } from "react";
 // returns the current hash location (minus the # symbol)
 // and a function to update it
 export const useHashLocation = () => {
-  const [loc, setLoc] = useState(window.location.hash.replace(/^#/, "") || "/");
+  const getHashPath = () => {
+    // Get the hash, remove the leading #
+    const hash = window.location.hash.replace(/^#/, "");
+    // If empty, default to "/"
+    if (!hash) return "/";
+    // Ensure it starts with /
+    return hash.startsWith("/") ? hash : "/" + hash;
+  };
+
+  const [loc, setLoc] = useState(getHashPath());
 
   useEffect(() => {
-    const handler = () => setLoc(window.location.hash.replace(/^#/, "") || "/");
+    const handler = () => setLoc(getHashPath());
 
     // Subscribe to hash changes
     window.addEventListener("hashchange", handler);

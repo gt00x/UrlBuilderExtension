@@ -4,19 +4,20 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import UrlBuilder from "@/pages/UrlBuilder";
-import NotFound from "@/pages/not-found";
 import { useHashLocation } from "@/lib/use-hash-location";
 
 function AppRouter() {
   return (
     <Switch>
       {/* 
-        Chrome Extensions load index.html. 
-        Hash routing treats empty hash as "/" which matches this.
+        For a Chrome Extension popup, we want to be very permissive.
+        We default to UrlBuilder for the root path "/" 
+        AND as a fallback for any other path to prevent 404s.
       */}
       <Route path="/" component={UrlBuilder} />
-      <Route path="/index.html" component={UrlBuilder} />
-      <Route component={NotFound} />
+      
+      {/* Fallback route - acts as a catch-all */}
+      <Route component={UrlBuilder} />
     </Switch>
   );
 }
